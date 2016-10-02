@@ -1,14 +1,23 @@
-/*!
- * Start Bootstrap - Shop Homepage (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
-
+/*Navigācijas Paneļa dizains*/
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    background-color: #2F2D2D
+    padding-top: 70px; /*Vajadzīgs priekš fiksētā navigācijas paneļa*/
+    background: #000 url(../img/back.jpg);
+    -webkit-animation: backgroundScroll 20s linear infinite;
+    animation: backgroundScroll 20s linear infinite;
+
+@keyframes backgroundScroll {
+from {background-position: 0 0;}
+to {background-position: -400px 0;}
+}
+}
+.navbar-toggle {
+    text-align:center;
+}
+.navbar-nav{
+ text-align:center;
 }
 
+/*Karuseļa uzstādījumi*/
 .slide-image {
     width: 100%;
 }
@@ -22,6 +31,7 @@ body {
     border-radius: 4px;
 }
 
+/*Preces informatīvais dizains*/
 .caption {
     height: 130px;
     overflow: hidden;
@@ -50,6 +60,47 @@ body {
     color: #333;
 }
 
+/*Footeris*/
 footer {
     margin: 50px 0;
+}
+
+/*Font awesome Fontu dizains*/
+.fa-sign-in {
+    padding-right: 5px;
+}
+.fa-users {
+    padding-right: 5px;
+}
+.fa-shopping-cart {
+    font-size: 19px;
+    margin-left: -4px;
+}
+/*Saites komponentu dizains*/
+a {
+    font-size:17px;
+}
+
+.lead {
+    text-transform: uppercase;
+    color: #9d9d9d;
+    text-align: center;
+    font-family: myfont;
+}
+
+@font-face{
+    font-family: "myfont";
+    src: url('../fonts/myfont.ttf'),
+    url('../fonts/myfont.ttf'); /* IE */
+}
+
+.list-group-item {
+    font-weight: bold;
+    background-color: #C0C0C0;
+}
+
+.boxed {
+    text-align: center;
+    font-family: myfont;
+    color: black;
 }
