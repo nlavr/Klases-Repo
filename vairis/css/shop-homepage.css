@@ -14,6 +14,13 @@ body {
  text-align:center;
 }
 
+.search {
+    position: relative;
+    float: left;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
 /*Karuseļa uzstādījumi*/
 .slide-image {
     width: 100%;

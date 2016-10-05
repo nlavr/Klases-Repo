@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+include("functions/platformas.php")
+?>
+
 <html lang="lv" xmlns="http://www.w3.org/1999/html">
 
 <head>
@@ -33,13 +37,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="index.html" class="navbar-brand"><img src="img/dragon.png"></a>
+                <a href="index.php" class="navbar-brand"><img src="img/dragon.png"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="search">
+                        <form method="get" action="results.php" enctype="multipart/form-data">
+                            <input type="text" name="user_query" placeholder="Search product"/>
+                            <input type="submit" name="search" value="Search"/>
+                        </form>
+                </div>
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="login.html"><i class="fa fa-sign-in"></i>Ienākt</a>
+                        <a href="login.php"><i class="fa fa-sign-in"></i>Ienākt</a>
                     </li>
                     <li>
                         <a href="cart.html"><i class="fa fa-shopping-cart"></i>  :5</a>
@@ -57,15 +67,7 @@
             <div class="col-md-3">
                 <p class="lead">Izvēlies platforumu</p>
                 <div class="list-group">
-                    <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="#" class="list-group-item">PC</a>
-                    <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="#" class="list-group-item">PlayStation 4</a>
-                    <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="#" class="list-group-item">Xbox One</a>
-                    <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="#" class="list-group-item">Wii U</a>
-                    <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="#" class="list-group-item">Xbox 360</a>
-                    <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="#" class="list-group-item">PlayStation 3</a>
-                    <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="#" class="list-group-item">Wii</a>
-                    <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="#" class="list-group-item">PlayStation 2</a>
-                    <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="#" class="list-group-item">Xbox</a>
+                    <?php getPlatforms(); ?>
                 </div>
             </div>
             <div class="col-md-9">

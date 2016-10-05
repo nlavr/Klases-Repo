@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+include("functions/platformas.php")
+?>
 <html lang="lv" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
@@ -32,13 +35,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="index.html" class="navbar-brand"><img src="img/dragon.png"></a>
+                <a href="index.php" class="navbar-brand"><img src="img/dragon.png"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="login.html"><i class="fa fa-sign-in"></i>Ienākt</a>
+                        <a href="login.php"><i class="fa fa-sign-in"></i>Ienākt</a>
                     </li>
                     <li>
                         <a href="cart.html"><i class="fa fa-shopping-cart"></i>  :5</a>
@@ -108,6 +111,12 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="firstname" id="firstname" tabindex="3" class="form-control" placeholder="Firstname" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="lastname" id="lastname" tabindex="3" class="form-control" placeholder="Lastname" value="">
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
