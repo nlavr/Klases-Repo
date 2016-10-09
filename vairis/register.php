@@ -15,7 +15,7 @@ if(isset($_POST["submit"]))
     $result = mysqli_query($dbconfig, $sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-    $run_customer = mysqli_query($con, $insert_customer);
+    $run_customer = mysqli_query($dbconfig, $insert_customer);
 
     if(mysqli_num_rows($result) == 1)
     {
