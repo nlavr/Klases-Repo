@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
-include("functions/platformas.php")
+include("functions/platformas.php");
+include("functions/dbconfig.php");
 ?>
 
 <html lang="lv" xmlns="http://www.w3.org/1999/html">
@@ -27,7 +28,11 @@ include("functions/platformas.php")
     <![endif]-->
 </head>
 <body>
-    <!-- Navigācija -->
+
+<pre>
+<?php var_dump(getMenuTree()); ?>
+</pre>
+ <!-- Navigācija -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -67,7 +72,23 @@ include("functions/platformas.php")
             <div class="col-md-3">
                 <p class="lead">Izvēlies platforumu</p>
                 <div class="list-group">
-                    <?php getPlatforms(); ?>
+                    <ul id="drop-nav">
+
+                        <?php foreach(getMenuTree() as $id => $item): ?>
+                            <li>
+                                <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="###############" class="list-group-item" style="background-color: rgb(192, 192, 192);"><?= $item['name'] ?></a>
+                                <?php if(count($item['categories'])): ?>
+                                    <ul>
+                                        <?php foreach($item['categories'] as $catId => $category): ?>
+                                            <li>
+                                                <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="###############" class="list-group-item" style="background-color: rgb(192, 192, 192);"><?= $category['name'] ?></a>
+                                            </li>
+                                        <?php endforeach ?>
+                                    </ul>
+                                <?php endif ?>
+                            </li>
+                        <?php endforeach ?>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-9">
