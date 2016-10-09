@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
-include("functions/platformas.php")
+include'functions/dbconfig.php';
 ?>
-<html lang="lv" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,134 +24,76 @@ include("functions/platformas.php")
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
-    <!-- Navigācija -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="index.php" class="navbar-brand"><img src="img/dragon.png"></a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="login.php"><i class="fa fa-sign-in"></i>Ienākt</a>
-                    </li>
-                    <li>
-                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>  :5</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
+<!-- Navigācija -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="panel panel-login">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <a href="#" class="active" id="login-form-link">Login</a>
-                            </div>
-                            <div class="col-xs-6">
-                                <a href="#" id="register-form-link">Register</a>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
-                                    <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-                                        <label for="remember"> Remember Me</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-sm-offset-3">
-                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text-center">
-                                                    <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
-                                    <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="firstname" id="firstname" tabindex="3" class="form-control" placeholder="Firstname" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="lastname" id="lastname" tabindex="3" class="form-control" placeholder="Lastname" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-sm-offset-3">
-                                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.php" class="navbar-brand"><img src="img/dragon.png"></a>
         </div>
-    </div>
-
-    <!-- /.container -->
-    <div class="container">
-        <hr>
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright BESTSOFT</p>
-                </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="search">
+                <form method="get" action="results.php" enctype="multipart/form-data">
+                    <input type="text" name="user_query" placeholder="Search product"/>
+                    <input type="submit" name="search" value="Search"/>
+                </form>
             </div>
-        </footer>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="login.php"><i class="fa fa-sign-in"></i>Ienākt</a>
+                </li>
+                <li>
+                    <a href="cart.html"><i class="fa fa-shopping-cart"></i>  :5</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <!--On Mouse Over skripts-->
-    <script src="js/login.js"></script>
+</nav>
+<div class="container">
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Ievadiet savus datus</h2>
+        <label for="inputEmail" class="sr-only">Epasts</label>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Epasts" required autofocus>
+        <label for="inputPassword" class="sr-only">Parole</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Parole" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Atcerēties
+            </label>
+            <a2 class="pin2">VAI</a2>
+          <a href="register.php" class="sendregister">Reģistrēties</a>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Ienākt</button>
+    </form>
+</div> <!-- /container -->
+
 </body>
+<?php
+if(isset($_POST['login'])) {
+    $Email = $_POST['email'];//lauku nosaukumi no kuriem dabusim datus
+    $Password = $_POST['password'];//lauku nosaukumi no kuriem dabusim datus
+
+    $select_user = "select * from users where Password ='$password' AND Email = '$Email'";
+    //izvelejam lietotaju no datubazes kur parole un emails atbilst ievaditajam laukos
+    $run_check = mysqli_query($dbconfig, $select_user);//pieprasijuma palaisana
+    $check_user = mysqli_num_rows($run_check);//parbaude vai ir tads lietotajs vai ne
+    if ($check_user == 0) {//parbaudes nosacijums
+        echo "<script>alert('Password or email is incorrect')</script>";// ja tada lietotaja nav datubaze tad izies sis pazinojums
+        exit();
+    }
+    $_SESSION['email'] = $Email;
+    echo "<script>alert ('You Have Been Logged in')</script>";
+    echo "<script>window.open('customer/index.php','_self')</script>";
+};
+?>
 </html>
