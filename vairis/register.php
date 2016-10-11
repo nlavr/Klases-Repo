@@ -1,36 +1,29 @@
 <?php
-if(isset($_POST["submit"]))
-{
-    $name = $_POST["UserName"];
-    $password = $_POST["Password"];
-    $firstname = $_POST["FirstName"];
-    $lastname = $_POST["LastName"];
-    $email = $_POST["Email"];
+include'functions/dbconfig.php';
 
-    $insert_customer = "insert into users
-    (name,password,firstname,lastname,email) 
-    values('$name','$password','$firstname,'$lastname','$email')";
+if(isset($_POST["submit"])) {
 
-    $sql = "SELECT Email FROM users WHERE Email='$email'";
+    $name = $_POST["username"];
+    $password = $_POST["password"];
+    $firstname = $_POST["firstname"];
+    $lastname = $_POST["lastname"];
+    $email = $_POST["email"];
+
+    $sql = "SELECT email FROM users WHERE email='".$email."'";
     $result = mysqli_query($dbconfig, $sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    // $run_customer = mysqli_query($dbconfig, $insert_customer);
 
-    $run_customer = mysqli_query($con, $insert_customer);
-
-    if(mysqli_num_rows($result) == 1)
-    {
+    if(!empty($row)) {
+        //failed
         echo "Sorry...This email already exist..";
-    }
-    else
-    {
-        $query = mysqli_query($dbconfig, "INSERT INTO users (name, email, password)VALUES ('$name', '$email', '$password')");
-
-        if($query)
-        {
-            echo "Thank You! you are now registered.";
-        }
+    } else {
+        //success
+        $query = mysqli_query($dbconfig, "INSERT INTO users (username, password, firstname, lastname, email) VALUES ('".$name."', '".$password."', '".$firstname."', '".$lastname."','".$email."')");
+        echo "Thank You! you are now registered.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -92,18 +85,26 @@ if(isset($_POST["submit"]))
     <!-- /.container -->
 </nav>
 <div class="container">
-    <form class="form-signin">
+    <form class="form-signin" method="POST">
         <h2 class="form-signin-heading">Ievadiet savus datus</h2>
-        <label for="inputUsername" class="sr-only" name="username">Lietotājvārds</label>
-        <input type="text" id="inputUsername" class="form-control" placeholder="Lietotājvārds" required autofocus>
-        <label for="inputPassword" class="sr-only" name="password">Parole</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Parole" required>
-        <label for="inputFirstName" class="sr-only" name="firstname">Vārds</label>
-        <input type="text" id="inputFirstName" class="form-control" placeholder="Vārds" required>
-        <label for="inputLastName" class="sr-only" name="lastname">Uzvārds</label>
-        <input type="text" id="inputLastName" class="form-control" placeholder="Uzvārds" required>
-        <label for="inputEmail" class="sr-only" name="email">Epasts</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Epasts" required>
+
+        <div>
+
+        <label for="inputUsername" class="sr-only">Lietotājvārds</label>
+        <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Lietotājvārds" required autofocus>
+
+        <label for="inputPassword" class="sr-only" >Parole</label>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Parole" required>
+
+        <label for="inputFirstName" class="sr-only" >Vārds</label>
+        <input type="text" id="inputFirstName" name="firstname"class="form-control" placeholder="Vārds" required>
+
+        <label for="inputLastName" class="sr-only" >Uzvārds</label>
+        <input type="text" id="inputLastName" name="lastname" class="form-control" placeholder="Uzvārds" required>
+
+        <label for="inputEmail" class="sr-only" >Epasts</label>
+        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Epasts" required>
+
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> Atcerēties
@@ -111,7 +112,8 @@ if(isset($_POST["submit"]))
             <a2 class="pin">VAI</a2>
             <a href="login.php" class="sendregister">Ienākt</a>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Reģistrēties</button>
+
+        <button class="" type="submit" name="submit">Reģistrēties</button>
     </form>
 </div> <!-- /container -->
 
