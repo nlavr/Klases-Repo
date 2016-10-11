@@ -16,11 +16,11 @@ if(isset($_POST["submit"])) {
 
     if(!empty($row)) {
         //failed
-        echo "Sorry...This email already exist..";
+        $error = 1;
     } else {
         //success
         $query = mysqli_query($dbconfig, "INSERT INTO users (username, password, firstname, lastname, email) VALUES ('".$name."', '".$password."', '".$firstname."', '".$lastname."','".$email."')");
-        echo "Thank You! you are now registered.";
+        $success = 1;
     }
 }
 
@@ -87,6 +87,17 @@ if(isset($_POST["submit"])) {
 <div class="container">
     <form class="form-signin" method="POST">
         <h2 class="form-signin-heading">Ievadiet savus datus</h2>
+        <?php if(isset($error) && $error == 1)  { ?>
+            <div class="error message" >
+                Sorry...This email already exist..
+            </div>
+        <?php } ?>
+
+        <?php if(isset($success) && $success == 1)  { ?>
+            <div class="succes message" >
+                Thank You! you are now registered.
+            </div>
+        <?php } ?>
 
         <div>
 

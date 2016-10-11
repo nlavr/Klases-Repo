@@ -164,3 +164,13 @@ body {
 .pin2 {
     padding-left: 35px;
 }
+.message {
+    padding:10px 0px;
+    clear: both
+}
+.succes {
+    color: green;
+}
+.error {
+    color:red;
+}
