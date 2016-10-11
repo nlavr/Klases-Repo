@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <?php
 include'functions/dbconfig.php';
+
+if(isset($_POST['login'])) {
+
+    $email = $_POST['email'];//lauku nosaukumi no kuriem dabusim datus
+    $password = $_POST['password'];//lauku nosaukumi no kuriem dabusim datus
+    $select_userdata = "select * from users where password ='$password' AND email = '$email'";
+
+    //izvelejam lietotaju no datubazes kur parole un emails atbilst ievaditajam laukos
+    $run_check = mysqli_query($dbconfig, $select_userdata);//pieprasijuma palaisana
+    $check_user = mysqli_num_rows($run_check);//parbaude vai ir tads lietotajs vai ne
+    if ($check_user == 0) {//parbaudes nosacijums
+        echo "<script>alert('Password or email is incorrect')</script>";// ja tada lietotaja nav datubaze tad izies sis pazinojums
+        exit();
+    }
+    $_SESSION['email'] = $email;
+    echo "<script>alert ('You Have Been Logged in')</script>";
+    echo "<script>window.open('index.php','_self')</script>";
+}
 ?>
 <html lang="en">
 <head>
@@ -42,8 +60,8 @@ include'functions/dbconfig.php';
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="search">
                 <form method="get" action="results.php" enctype="multipart/form-data">
-                    <input type="text" name="user_query" placeholder="Search product"/>
-                    <input type="submit" name="search" value="Search"/>
+                    <input type="text" name="search_query" placeholder="Search product"/>
+                    <input type="submit" name="search" value="search"/>
                 </form>
             </div>
             <ul class="nav navbar-nav">
@@ -60,7 +78,7 @@ include'functions/dbconfig.php';
     <!-- /.container -->
 </nav>
 <div class="container">
-    <form class="form-signin">
+    <form class="form-signin" method="post">
         <h2 class="form-signin-heading">Ievadiet savus datus</h2>
         <label for="inputEmail" class="sr-only">Epasts</label>
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Epasts" required autofocus>
@@ -78,22 +96,4 @@ include'functions/dbconfig.php';
 </div> <!-- /container -->
 
 </body>
-<?php
-if(isset($_POST['login'])) {
-    $Email = $_POST['email'];//lauku nosaukumi no kuriem dabusim datus
-    $Password = $_POST['password'];//lauku nosaukumi no kuriem dabusim datus
-
-    $select_user = "select * from users where Password ='$password' AND Email = '$Email'";
-    //izvelejam lietotaju no datubazes kur parole un emails atbilst ievaditajam laukos
-    $run_check = mysqli_query($dbconfig, $select_user);//pieprasijuma palaisana
-    $check_user = mysqli_num_rows($run_check);//parbaude vai ir tads lietotajs vai ne
-    if ($check_user == 0) {//parbaudes nosacijums
-        echo "<script>alert('Password or email is incorrect')</script>";// ja tada lietotaja nav datubaze tad izies sis pazinojums
-        exit();
-    }
-    $_SESSION['email'] = $Email;
-    echo "<script>alert ('You Have Been Logged in')</script>";
-    echo "<script>window.open('customer/index.php','_self')</script>";
-};
-?>
 </html>
