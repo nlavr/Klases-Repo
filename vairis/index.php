@@ -28,10 +28,6 @@ include("functions/dbconfig.php");
     <![endif]-->
 </head>
 <body>
-
-<pre>
-<?php var_dump(getMenuTree()); ?>
-</pre>
  <!-- Navigācija -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -53,9 +49,11 @@ include("functions/dbconfig.php");
                         </form>
                 </div>
                 <ul class="nav navbar-nav">
+                    <?php if ($_SESSION['email'] = true): echo('Hello world')  ?>
                     <li>
                         <a href="login.php"><i class="fa fa-sign-in"></i>Ienākt</a>
                     </li>
+                    <?php endif;?>
                     <li>
                         <a href="cart.html"><i class="fa fa-shopping-cart"></i>  :5</a>
                     </li>
