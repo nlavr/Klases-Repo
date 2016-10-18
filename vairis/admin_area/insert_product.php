@@ -1,9 +1,40 @@
 <!DOCTYPE html>
 <?php
-include("../functions/platformas.php");
+session_start();
 include("../functions/dbconfig.php");
-?>
+include("../functions/connect.php");
 
+if(isset($_POST["submit"])) {
+
+    /**Iegūstam datus no formas**/
+    $name = $_POST["name"];
+    $namelv = $_POST["namelv"];
+    $platform = $_POST["platform"];
+    $quantity = $_POST["quantity"];
+    $price = $_POST["price"];
+    $description = $_POST["description"];
+    $descriptionlv = $_POST["descriptionlv"];
+
+    //**Iegūstam attēlu no formas**//
+    if(empty($_FILES) || !isset($_FILES['image']))
+
+    $insert_product = "insert into products 
+    (name, namelv, platform, quantity, price, description,descriptionlv) VALUES 
+    ('$name', '$namelv', '$platform', '$quantity', '$price', '$description', '$descriptionlv')";
+
+    $insert_prod = mysqli_query($con, $insert_product);
+    
+    if ($insert_prod){
+        echo "<script>alert('Product has been inserted')</script>";
+        echo "<script>window.open('insert_product.php','_self')</script>";
+    }
+}
+
+
+?>
+<?php
+$con = mysqli_connect("localhost", "root", "", "myshop");
+?>
 <html lang="lv" xmlns="http://www.w3.org/1999/html">
 
 <head>
@@ -26,6 +57,9 @@ include("../functions/dbconfig.php");
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- Teksta lauka skripts -->
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
 </head>
 <body>
 <!-- Navigācija -->
@@ -62,11 +96,11 @@ include("../functions/dbconfig.php");
     <!-- /.container -->
 </nav>
 
-<form class="form-horizontal">
+<form class="form-horizontal" action="insert_product.php" method="post" enctype="multipart/form-data">
     <fieldset>
-
         <!-- Form Name -->
         <legend>PRODUCTS</legend>
+        <h1>Add product</h1>
 
         <!-- Text input-->
         <div class="form-group">
@@ -86,18 +120,22 @@ include("../functions/dbconfig.php");
 
         <!-- Select Basic -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="category">Kategorija</label>
-            <div class="col-md-4">
-                <select id="category" name="category" placeholder="Kategorija" class="form-control" required="">
-                </select>
-            </div>
-        </div>
-
-        <!-- Select Basic -->
-        <div class="form-group">
             <label class="col-md-4 control-label" for="platform">Platforma</label>
             <div class="col-md-4">
                 <select id="platform" name="platform" placeholder="Platforma" class="form-control" required="">
+
+                    <?php
+                    // Querijs, lai dabūtu visas platformas
+                    $get_platforms = "select * from platforms";
+
+                    $run_platforms = mysqli_query($con, $get_platforms);
+
+                    while ($row_platforms = mysqli_fetch_array($run_platforms)) {
+                        $platorm_id = $row_platforms['ID'];
+                        $platform_name = $row_platforms['name'];
+                        echo "<option>$platform_name</option>";
+                    }
+                    ?>
                 </select>
             </div>
         </div>
@@ -107,6 +145,14 @@ include("../functions/dbconfig.php");
             <label class="col-md-4 control-label" for="quantity">Daudzums</label>
             <div class="col-md-4">
                 <input id="quantity" name="quantity" placeholder="Daudzums" class="form-control input-md" required="" type="text">
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="price">Daudzums</label>
+            <div class="col-md-4">
+                <input id="price" name="price" placeholder="Cena" class="form-control input-md" required="" type="text">
             </div>
         </div>
 
@@ -122,15 +168,15 @@ include("../functions/dbconfig.php");
         <div class="form-group">
             <label class="col-md-4 control-label" for="descriptionlv">Apraksts LV</label>
             <div class="col-md-4">
-                <textarea class="form-control" id="descriptionlv" name="Apraksts LV"></textarea>
+                <textarea class="form-control" id="descriptionlv" name="descriptionlv"></textarea>
             </div>
         </div>
 
         <!-- File Button -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="filebutton">Bilde</label>
+            <label class="col-md-4 control-label" for="file">Bilde</label>
             <div class="col-md-4">
-                <input id="filebutton" name="filebutton" class="input-file" type="file">
+                <input id="file" name="file" class="input-file" type="file">
             </div>
         </div>
 

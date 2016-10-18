@@ -1,4 +1,5 @@
 <?php
+session_start();
 include'functions/dbconfig.php';
 
 if(isset($_POST["submit"])) {
@@ -19,8 +20,12 @@ if(isset($_POST["submit"])) {
         $error = 1;
     } else {
         //success
-        $query = mysqli_query($dbconfig, "INSERT INTO users (username, password, firstname, lastname, email) VALUES ('".$name."', '".$password."', '".$firstname."', '".$lastname."','".$email."')");
+        $passwordmd5 = md5($password);
+        $query = mysqli_query($dbconfig, "INSERT INTO users (username, password, firstname, lastname, email) VALUES ('".$name."', '".$passwordmd5."', '".$firstname."', '".$lastname."','".$email."')");
         $success = 1;
+        echo "<script> alert('You have been registered')</script>";
+        header('Location: login.php');
+        exit;
     }
 }
 
@@ -51,50 +56,22 @@ if(isset($_POST["submit"])) {
 </head>
 
 <body>
-<!-- Navigācija -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="index.php" class="navbar-brand"><img src="img/dragon.png"></a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <div class="search">
-                <form method="get" action="results.php" enctype="multipart/form-data">
-                    <input type="text" name="user_query" placeholder="Search product"/>
-                    <input type="submit" name="search" value="Search"/>
-                </form>
-            </div>
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="login.php"><i class="fa fa-sign-in"></i>Ienākt</a>
-                </li>
-                <li>
-                    <a href="cart.html"><i class="fa fa-shopping-cart"></i>  :5</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+
+<?php
+include 'menu_unlogged.php';
+?>
+
 <div class="container">
     <form class="form-signin" method="POST">
         <h2 class="form-signin-heading">Ievadiet savus datus</h2>
-        <?php if(isset($error) && $error == 1)  { ?>
+        <?php if(isset($error) && $error == 1) { ?>
             <div class="error message" >
                 Sorry...This email already exist..
             </div>
-        <?php } ?>
+        <?php }  ?>
 
         <?php if(isset($success) && $success == 1)  { ?>
-            <div class="succes message" >
+            <div class="success message" >
                 Thank You! you are now registered.
             </div>
         <?php } ?>
@@ -123,7 +100,6 @@ if(isset($_POST["submit"])) {
                 <a2 class="pin">VAI</a2>
                 <a href="login.php" class="sendregister">Ienākt</a>
             </div>
-
             <button class="" type="submit" name="submit">Reģistrēties</button>
     </form>
 </div> <!-- /container -->

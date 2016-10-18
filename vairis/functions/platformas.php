@@ -1,33 +1,17 @@
 <?php
+$con = mysqli_connect("localhost", "root", "", "myshop");
 
-function getMenuTree()
+function getplatforms()
 {
-    // Pieslēgšanās pie lokālā servera
-    $con = mysqli_connect("localhost", "root", "", "myshop");
+    global $con;
+    $get_platforms = "select * from platforms";
 
-    // Šis tiks atgriezts beigās
-    $items = [];
+    $run_platforms = mysqli_query($con, $get_platforms);
 
-    // Querijs, lai dabūtu visas platformas
-    $platforms = mysqli_query($con, "select * from platforms");
-
-    // Querijs, lai dabūtu visas kategorijas
-    $categories = mysqli_query($con, "select * from category");
-
-    // Dabū no db ārā visas platformas un saglabā $items masīvā
-    while($platform = mysqli_fetch_array($platforms)) {
-        $items[$platform['ID']] = [
-            'name' => $platform['name'],// Katrai platformai ir name
-            'categories' => [] // Katrai platformai var būt piesaistītas kategorijas (tukšums pēc noklusējuma)
-        ];
+    while ($row_platforms = mysqli_fetch_array($run_platforms)) {
+        $platorm_id = $row_platforms['ID'];
+        $platform_name = $row_platforms['name'];
+        echo " <li><a onmouseover=\"changeTo(this)\" onmouseout=\"changeBack(this)\" href=\"###############\" class=\"list-group-item\" style=\"background-color: rgb(192, 192, 192);\">$platform_name</a></li>";
     }
-    // Dabū no db ārā visas kategorijas un saglabā $items masīvā pie attiecīgās platformas
-    while($category = mysqli_fetch_array($categories))   {
-        // Viņš saglabā kategorijas nosaukumu iekš attiecīgās platformas categories saraksta beigās
-        $items[$category['parentID']]['categories'][$category['ID']] = [
-            'name' => $category['name']
-        ];
-    }
-    return $items;
 }
 ?>

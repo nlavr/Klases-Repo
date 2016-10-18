@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+session_start();
 include("functions/platformas.php");
 include("functions/dbconfig.php");
 ?>
@@ -28,42 +29,14 @@ include("functions/dbconfig.php");
     <![endif]-->
 </head>
 <body>
- <!-- Navigācija -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="index.php" class="navbar-brand"><img src="img/dragon.png"></a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <div class="search">
-                        <form method="get" action="results.php" enctype="multipart/form-data">
-                            <input type="text" name="user_query" placeholder="Search product"/>
-                            <input type="submit" name="search" value="Search"/>
-                        </form>
-                </div>
-                <ul class="nav navbar-nav">
-                    <?php if ($_SESSION['email'] = true): echo('Hello world')  ?>
-                    <li>
-                        <a href="login.php"><i class="fa fa-sign-in"></i>Ienākt</a>
-                    </li>
-                    <?php endif;?>
-                    <li>
-                        <a href="cart.html"><i class="fa fa-shopping-cart"></i>  :5</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
 
+<?php
+    if(isset($_SESSION['email']) == 1){
+        include 'menu_logged.php';
+    }else{
+        include 'menu_unlogged.php';
+    }
+?>
     <!-- Page Content -->
     <div class="container">
         <div class="row">
@@ -71,21 +44,9 @@ include("functions/dbconfig.php");
                 <p class="lead">Izvēlies platforumu</p>
                 <div class="list-group">
                     <ul id="drop-nav">
-
-                        <?php foreach(getMenuTree() as $id => $item): ?>
-                            <li>
-                                <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="###############" class="list-group-item" style="background-color: rgb(192, 192, 192);"><?= $item['name'] ?></a>
-                                <?php if(count($item['categories'])): ?>
-                                    <ul>
-                                        <?php foreach($item['categories'] as $catId => $category): ?>
-                                            <li>
-                                                <a onmouseover="changeTo(this)" onmouseout="changeBack(this)" href="###############" class="list-group-item" style="background-color: rgb(192, 192, 192);"><?= $category['name'] ?></a>
-                                            </li>
-                                        <?php endforeach ?>
-                                    </ul>
-                                <?php endif ?>
-                            </li>
-                        <?php endforeach ?>
+                        <?php
+                        getplatforms();
+                        ?>
                     </ul>
                 </div>
             </div>
