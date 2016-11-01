@@ -8,7 +8,6 @@ if(isset($_POST['login'])) {
     $email = $_POST['email'];//lauku nosaukumi no kuriem dabusim datus
     $password = md5($_POST['password']);//lauku nosaukumi no kuriem dabusim datus
     $select_userdata = "select * from users where password ='$password' AND email = '$email'";
-    $username = $check_user['username'];
 
     //izvelejam lietotaju no datubazes kur parole un emails atbilst ievaditajam laukos
     $run_check = mysqli_query($dbconfig, $select_userdata);//pieprasijuma palaisana

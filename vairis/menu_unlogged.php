@@ -20,10 +20,10 @@
             </div>
             <ul class="nav navbar-nav">
                 <li>
-                        <a href="login.php"><i class="fa fa-sign-in"></i>Ienākt</a>
+                    <a href="login.php"><i class="fa fa-sign-in"></i>Ienākt</a>
                 </li>
                 <li>
-                    <a href="cart.html"><i class="fa fa-shopping-cart"></i>  :5</a>
+                    <a href="cart.php"><i class="fa fa-shopping-cart"></i></a>
                 </li>
             </ul>
         </div>

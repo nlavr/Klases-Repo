@@ -10,23 +10,26 @@ if(isset($_POST["submit"])) {
     $name = $_POST["name"];
     $namelv = $_POST["namelv"];
     $platform = $_POST["platform"];
-    $quantity = $_POST["quantity"];
+    $amount = $_POST["amount"];
     $price = $_POST["price"];
     $description = $_POST["description"];
     $descriptionlv = $_POST["descriptionlv"];
 
     //**Iegūstam attēlu no formas**//
-    if(empty($_FILES) || !isset($_FILES['image']))
+    $image = $_FILES['image']['name'];
+    $image_tmp = $_FILES['image']['tmp_name'];
+
+    move_uploaded_file($image_tmp,"../img/$image");
 
     $insert_product = "insert into products 
-    (name, namelv, platform, quantity, price, description,descriptionlv) VALUES 
-    ('$name', '$namelv', '$platform', '$quantity', '$price', '$description', '$descriptionlv')";
+    (name, namelv, platform, amount, price, description, descriptionlv, image) VALUES 
+    ('$name', '$namelv', '$platform', '$amount', '$price', '$description', '$descriptionlv', '$image')";
 
-    $insert_prod = mysqli_query($con, $insert_product);
-    
-    if ($insert_prod){
+    $insert_pro = mysqli_query($dbconfig, $insert_product);
+
+    if($insert_pro){
         echo "<script>alert('Product has been inserted')</script>";
-        echo "<script>window.open('insert_product.php','_self')</script>";
+        echo "<script>window.open('insert_product.php', '_self')</script>";
     }
 }
 
@@ -106,7 +109,7 @@ $con = mysqli_connect("localhost", "root", "", "myshop");
         <div class="form-group">
             <label class="col-md-4 control-label" for="name">Preces nosaukums</label>
             <div class="col-md-4">
-                <input id="name" name="name" placeholder="Nosaukums" class="form-control input-md" required="" type="text">
+                <input id="name" name="name" placeholder="Nosaukums" class="form-control input-md" type="text">
             </div>
         </div>
 
@@ -114,7 +117,7 @@ $con = mysqli_connect("localhost", "root", "", "myshop");
         <div class="form-group">
             <label class="col-md-4 control-label" for="namelv">Preces apraksts</label>
             <div class="col-md-4">
-                <input id="namelv" name="namelv" placeholder="Nosaukumslv" class="form-control input-md" required="" type="text">
+                <input id="namelv" name="namelv" placeholder="Nosaukumslv" class="form-control input-md" type="text">
             </div>
         </div>
 
@@ -133,7 +136,7 @@ $con = mysqli_connect("localhost", "root", "", "myshop");
                     while ($row_platforms = mysqli_fetch_array($run_platforms)) {
                         $platorm_id = $row_platforms['ID'];
                         $platform_name = $row_platforms['name'];
-                        echo "<option>$platform_name</option>";
+                        echo "<option value='$platorm_id'>$platform_name</option>";
                     }
                     ?>
                 </select>
@@ -144,7 +147,7 @@ $con = mysqli_connect("localhost", "root", "", "myshop");
         <div class="form-group">
             <label class="col-md-4 control-label" for="quantity">Daudzums</label>
             <div class="col-md-4">
-                <input id="quantity" name="quantity" placeholder="Daudzums" class="form-control input-md" required="" type="text">
+                <input id="amount" name="amount" placeholder="Daudzums" class="form-control input-md" required="" type="text">
             </div>
         </div>
 
@@ -176,7 +179,7 @@ $con = mysqli_connect("localhost", "root", "", "myshop");
         <div class="form-group">
             <label class="col-md-4 control-label" for="file">Bilde</label>
             <div class="col-md-4">
-                <input id="file" name="file" class="input-file" type="file">
+                <input id="image" name="image" class="input-file" type="file">
             </div>
         </div>
 

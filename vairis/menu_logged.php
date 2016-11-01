@@ -23,7 +23,7 @@
                     <a href="profile.php"><i class="fa fa-user"> Hello <?php echo $_SESSION["email"]; ?></i></a>;
                 </li>
                 <li>
-                    <a href="cart.php"><i class="fa fa-shopping-cart"></i>  :5</a>
+                    <a href="cart.php"><i class="fa fa-shopping-cart"></i></a>
                 </li>
                 <li>
                     <a href="logout.php">Logout</a>
