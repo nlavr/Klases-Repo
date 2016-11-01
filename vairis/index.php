@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include("functions/platformas.php");
 include("functions/dbconfig.php");
 ?>
 
@@ -45,7 +44,7 @@ include("functions/dbconfig.php");
                 <div class="list-group">
                     <ul id="drop-nav">
                         <?php
-                        getplatforms();
+                            include("functions/platformas.php");
                         ?>
                     </ul>
                 </div>

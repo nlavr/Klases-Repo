@@ -1,5 +1,4 @@
 <?php
-session_start();
 include'functions/dbconfig.php';
 
 if(isset($_POST["submit"])) {
@@ -23,12 +22,17 @@ if(isset($_POST["submit"])) {
         $passwordmd5 = md5($password);
         $query = mysqli_query($dbconfig, "INSERT INTO users (username, password, firstname, lastname, email) VALUES ('".$name."', '".$passwordmd5."', '".$firstname."', '".$lastname."','".$email."')");
         $success = 1;
-        echo "<script> alert('You have been registered')</script>";
-        header('Location: login.php');
-        exit;
     }
 }
 
+
+function checkPost($name) {
+    if (isset($_POST[$name]))  {
+        return $_POST[$name];
+    } else {
+        return "";
+    }
+}c
 ?>
 
 <!DOCTYPE html>
@@ -76,22 +80,23 @@ include 'menu_unlogged.php';
             </div>
         <?php } ?>
 
+        <?php if(!isset($success)) { ?>
         <div>
 
             <label for="inputUsername" class="sr-only">Lietotājvārds</label>
-            <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Lietotājvārds" required autofocus>
+            <input type="text" id="inputUsername" value="<?php echo checkPost('username'); ?>" name="username" class="form-control" placeholder="Lietotājvārds" required autofocus>
 
             <label for="inputPassword" class="sr-only" >Parole</label>
             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Parole" required>
 
             <label for="inputFirstName" class="sr-only" >Vārds</label>
-            <input type="text" id="inputFirstName" name="firstname"class="form-control" placeholder="Vārds" required>
+            <input type="text" id="inputFirstName" value="<?php echo checkPost('firstname'); ?>" name="firstname"class="form-control" placeholder="Vārds" required>
 
             <label for="inputLastName" class="sr-only" >Uzvārds</label>
-            <input type="text" id="inputLastName" name="lastname" class="form-control" placeholder="Uzvārds" required>
+            <input type="text" id="inputLastName" value="<?php echo checkPost('lastname'); ?>" name="lastname" class="form-control" placeholder="Uzvārds" required>
 
             <label for="inputEmail" class="sr-only" >Epasts</label>
-            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Epasts" required>
+            <input type="email" id="inputEmail" name="email" value="<?php echo checkPost('email'); ?>" class="form-control" placeholder="Epasts" required>
 
             <div class="checkbox">
                 <label>
@@ -101,8 +106,8 @@ include 'menu_unlogged.php';
                 <a href="login.php" class="sendregister">Ienākt</a>
             </div>
             <button class="" type="submit" name="submit">Reģistrēties</button>
+            <?php } ?>
     </form>
 </div> <!-- /container -->
-
 </body>
 </html>

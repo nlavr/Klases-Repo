@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 include'functions/dbconfig.php';
@@ -12,7 +11,7 @@ if(isset($_POST['login'])) {
     //izvelejam lietotaju no datubazes kur parole un emails atbilst ievaditajam laukos
     $run_check = mysqli_query($dbconfig, $select_userdata);//pieprasijuma palaisana
     while($row = $run_check->fetch_assoc()) {
-        print_r($row);
+        $username = $row['username'];
     }
     $check_user = mysqli_num_rows($run_check);//parbaude vai ir tads lietotajs vai ne
 
@@ -26,15 +25,15 @@ if(isset($_POST['login'])) {
         $_SESSION['email'] = $email;
         $_SESSION['username'] = $username;
         echo "<script>alert ('You Have Been Logged in')</script>";
-        header('Location: index.php');
-        exit;
+        //header('Location: index.php');
+        //exit;
     }
 }
 if(isset($_GET['logout'])) {
     unset($_SESSION['email']);
 }
 ?>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">

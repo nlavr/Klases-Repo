@@ -20,7 +20,7 @@
             </div>
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="profile.php"><i class="fa fa-user"> Hello <?php echo $_SESSION["email"]; ?></i></a>;
+                    <a href="profile.php"><i class="fa fa-user"> Hello <?php print_r($_SESSION["username"]); ?></i></a>
                 </li>
                 <li>
                     <a href="cart.php"><i class="fa fa-shopping-cart"></i></a>
