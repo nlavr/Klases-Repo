@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php
-session_start();
 include("functions/platformas.php");
 include("functions/dbconfig.php");
 ?>

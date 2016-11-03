@@ -1,7 +1,7 @@
 <?php
 
 global $con;
-$con = mysqli_connect("localhost", "root", "root", "myshop");
+$con = mysqli_connect("localhost", "root", "", "myshop");
 
 $get_platforms = "select * from platforms";
 $run_platforms = mysqli_query($con, $get_platforms);

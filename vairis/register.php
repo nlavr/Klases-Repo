@@ -32,7 +32,7 @@ function checkPost($name) {
     } else {
         return "";
     }
-}c
+}
 ?>
 
 <!DOCTYPE html>

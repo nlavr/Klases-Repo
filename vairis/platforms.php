@@ -1,5 +1,4 @@
 <?php
-session_start();
 include'functions/dbconfig.php';
 
 if(isset($_GET['platoromId'])) {

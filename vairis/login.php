@@ -1,5 +1,4 @@
 <?php
-session_start();
 include'functions/dbconfig.php';
 
 if(isset($_POST['login'])) {
@@ -64,6 +63,7 @@ include 'menu_unlogged.php';
 ?>
 
 <div class="container">
+
     <form class="form-signin" method="post">
         <h2 class="form-signin-heading">Ievadiet savus datus</h2>
         <label for="inputEmail" class="sr-only">Epasts</label>
