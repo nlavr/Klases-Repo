@@ -1,5 +1,5 @@
 # Klases-Repo
-[Link to Git](#1-git-to-work---wording-with-git)
+[Link to Git](#Hi--Nikita)
 A SQL query goes into a bar, walks up to two tables and asks, "Can I join you?"
 
 
@@ -12,4 +12,4 @@ A SQL query goes into a bar, walks up to two tables and asks, "Can I join you?"
 
 
 
-## 1. Git To Work - Wording with git
+## Hi, Nikita
