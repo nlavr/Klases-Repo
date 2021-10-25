@@ -1,5 +1,5 @@
 # Klases-Repo
-[Link to Git](#markdown-header-1-git-to-work-working-with-git)
+[Link to Git](#1-git-to-work---wording-with-git)
 A SQL query goes into a bar, walks up to two tables and asks, "Can I join you?"
 
 
